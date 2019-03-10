@@ -15,10 +15,9 @@ function getRandomWord() {
 
 function parseWord(randomWord) {
     var wordArray = {};
-    for(var i = 0; i < randomWord.length; i++)
-    {
+    for (var i = 0; i < randomWord.length; i++) {
         var letter = randomWord.charAt(i);
-        if(!wordArray[letter]){
+        if (!wordArray[letter]) {
             var positionList = [];
             wordArray[letter] = positionList;
         }
@@ -27,52 +26,115 @@ function parseWord(randomWord) {
     return wordArray;
 }
 
-function startGame() {
-    randomWord = getRandomWord();
-    wordHash = parseWord(randomWord);
+function displayLetterNotInWord(letter) {
+    var lettersGuessed = document.getElementById('lettersChosen');
+
+    var letterGuessed = document.createElement('span');
+
+    letterGuessed.textContent = letter + " ";
+    lettersGuessed.appendChild(letterGuessed);
+}
+
+function cleanGame() {
     opportunities = 7;
     lettersGuessed = 0;
-
-    console.log(randomWord);
-
+    //clean all variable spaces
     var wordHtml = document.getElementById('wordToGuess');
     wordHtml.textContent = "";
 
-    for(var i = 0; i < randomWord.length; i++)
-    {
-      var letterSpace = document.createElement('span');
-      letterSpace.setAttribute("id", "letter" + i);
-      letterSpace.textContent = "_ ";
-      wordHtml.appendChild(letterSpace);
+    var lettersHtml = document.getElementById('lettersChosen');
+    lettersHtml.textContent = "";
+
+    displayImage("hangman");
+
+
+}
+
+function displaySpacesForWord() {
+
+    var wordHtml = document.getElementById('wordToGuess');
+
+    //display spaces for word
+    for (var i = 0; i < randomWord.length; i++) {
+        var letterSpace = document.createElement('span');
+        letterSpace.setAttribute("id", "letter" + i);
+        letterSpace.style.fontSize = "200%"
+        letterSpace.setAttribute("zIndex", "2");
+        letterSpace.textContent = "_ ";
+        wordHtml.appendChild(letterSpace);
     }
 }
+
+function displayImage(type) {
+
+    if(type == "word")
+    {
+         document.body.style.backgroundImage = "url('assets/images/" + randomWord + ".jpg')";
+    }
+
+    if(type == "hangman")
+    {
+        document.getElementById("hangmanImg").src="assets/images/hangman" + opportunities + ".png";
+    }
+
+    if(type == "winner")
+    {
+        document.getElementById("hangmanImg").src="assets/images/winner.jpg";
+    }
+}
+
+function checkForWinner()
+{
+    // if (opportunities == 0) {
+    //     alert("Loooser!");
+    // }
+
+    if (lettersGuessed == randomWord.length) {
+        displayImage("winner");
+    }
+}
+
+function updateOpportunities(){
+    var opportunitiesHtml = document.getElementById('opportunitiesLeft');
+    opportunitiesHtml.textContent = opportunities;
+}
+
+function startGame() {
+
+    cleanGame();
+    updateOpportunities();
+
+    //Generate random word
+    randomWord = getRandomWord();
+    wordHash = parseWord(randomWord);
+    displayImage("word");
+
+    displaySpacesForWord();
+
+}
+
+
 
 document.onkeyup = function (event) {
 
     var userGuess = event.key.toLowerCase();
+    //look for word in hash table to retrieve positions
     var positionList = wordHash[userGuess];
 
-
-    console.log(userGuess);
-    
-
-    if(positionList) {
-        for(var i=0; i<positionList.length; i++) {
+    if (positionList) {
+        for (var i = 0; i < positionList.length; i++) {
             var space = document.getElementById('letter' + positionList[i]);
             space.textContent = userGuess + " ";
             lettersGuessed++;
         }
         wordHash[userGuess] = [];
-    }else {
+    } else {
         opportunities--;
+        displayLetterNotInWord(userGuess);
+        displayImage("hangman");
     }
 
-    if(opportunities == 0) {
-        alert("Loooser!");
-    }
-
-    if(lettersGuessed == randomWord.length) {
-        alert("Winner!");
-    }
+    updateOpportunities();
+    checkForWinner();
 
 }

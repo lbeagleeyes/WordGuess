@@ -5,64 +5,71 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
 
   <script type="text/javascript" src="assets/javascript/game.js"></script>
 
   <title>Reptile Hangman</title>
 </head>
 
-<body >
+<body>
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4">Welcome to Reptiles Word Guess Game!</h1>
+      <h1 class="display-4" id="mainTitle">Welcome to the Reptiles Word Guess Game!</h1>
       <p class="lead">You have 7 opportunities to guess the word below before a reptile eats you:</p>
-     
+
     </div>
   </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4"></div>
-      <div class="col-sm-4">
-          <h3 id="wordToGuess"> </h3>
-          <br><br>
-      </div>
-      <div class="col-sm-4"></div>
-    </div>
+  <div class=" maniContainer">
+    <div class="container">
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <!-- Letters chosen -->
           <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">Letters Chosen</h5>
-                
-                <p id="lettersChosen" class="card-text"> </p>
-               
-              </div>
+            <div class="card-body">
+              <h5 class="card-title">Letters Chosen</h5>
+
+              <p id="lettersChosen" class="card-text"> </p>
+
             </div>
+          </div>
         </div>
-        <div class="col-sm-4">
-            <button type="button" id="playBtn" class="btn btn-primary" onclick="startGame()">Play</button>
+        <div class="col-sm-6 center-text">
+          <h2 id="wordToGuess"> </h2>
+          <br><br>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
+
           <!-- Opportunities left -->
           <div class="card m-2" style="width: 18rem;">
-              <div class="card-body">
-                  <h5 class="card-title">Opportunities Left</h5>
-                  <p class="card-text" id="opportunitiesLeft"></p>
-                  
-                </div>
-              <img class="card-img-bottom" src="assets/images/hangman1.png" alt="Card image cap">
-             
+            <div class="card-body">
+              <h5 class="card-title">Opportunities Left</h5>
+              <p class="card-text" id="opportunitiesLeft"></p>
+
             </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+
+        </div>
+        <div class="col-sm-4">
+          <button type="button" id="playBtn" class="btn btn-primary" onclick="startGame()">Play</button>
+        </div>
+        <div class="col-sm-4">
+            <img id="hangmanImg" class="img-fluid"  src="assets/images/hangman7.png">
         </div>
       </div>
     </div>
 
-
+  </div>
   <script>
 
   </script>

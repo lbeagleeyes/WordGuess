@@ -2,3 +2,22 @@
     width: 50%;
     margin: 10%;
 }
+
+#mainTitle{
+    font-family: 'Luckiest Guy', cursive;
+    align-content: center;
+}
+
+.maniContainer {
+    background-color: white;
+}
+
+#wordToGuess {
+    align-self: center;
+    float: none;
+    margin-left: 10%;
+}
+
+/* #hangmanImg {
+
+} */
