@@ -10,6 +10,7 @@
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
   <script type="text/javascript" src="assets/javascript/game.js"></script>
 
@@ -19,8 +20,8 @@
 <body>
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4" id="mainTitle">Welcome to the Reptiles Word Guess Game!</h1>
-      <p class="lead">You have 7 opportunities to guess the word below before a reptile eats you:</p>
+      <h1 class="display-5" id="mainTitle">Welcome to the Reptiles Word Guess Game!</h1>
+      <!-- <p class="lead">You have 7 opportunities to guess the word below before a reptile eats you:</p> -->
 
     </div>
   </div>
@@ -30,7 +31,7 @@
       <div class="row">
         <div class="col-sm-3">
           <!-- Letters chosen -->
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 16rem;">
             <div class="card-body">
               <h5 class="card-title">Letters Chosen</h5>
 
@@ -57,13 +58,21 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
+          <!-- Score -->
+          <div class="card" style="width: 16rem;">
+              <div class="card-body">
+                <h5 class="card-title">Score</h5>
+                <p class="card-text">Wins:<span id="wins"></span></p>
+                <p class="card-text">Loses:<span id="loses"></span></p>
+              </div>
+            </div>
 
         </div>
-        <div class="col-sm-4">
-          <button type="button" id="playBtn" class="btn btn-primary" onclick="startGame()">Play</button>
+        <div class="col-sm-6">
+          <button type="button" id="playBtn" class="btn btn-primary" onclick="startGame()">New Game</button>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <img id="hangmanImg" class="img-fluid"  src="assets/images/hangman7.png">
         </div>
       </div>

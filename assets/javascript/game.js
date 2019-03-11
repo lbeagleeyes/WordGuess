@@ -1,13 +1,18 @@
 var randomWord;
 var wordHash;
 var opportunities;
-var lettersGuessed;
+var lettersGuessedRight;
+var lettersGuessedWrong;
+var gameActive;
+var wins = 0;
+var loses = 0;
 
 function getRandomWord() {
     var wordRepository = [
         "turtle", "tortoise", "chameleon", "iguana", "boa", "anaconda", "mamba", "python", "viper", "rattlesnake", "crocodile", "alligator", "gecko"];
 
-    var randomIndex = Math.floor((Math.random() * wordRepository.length - 1));
+    var randomIndex = Math.floor((Math.random() * 100));
+    randomIndex = randomIndex % wordRepository.length;
     var randomWord = wordRepository[randomIndex];
 
     return randomWord;
@@ -37,7 +42,9 @@ function displayLetterNotInWord(letter) {
 
 function cleanGame() {
     opportunities = 7;
-    lettersGuessed = 0;
+    lettersGuessedRight = 0;
+    lettersGuessedWrong = [];
+
     //clean all variable spaces
     var wordHtml = document.getElementById('wordToGuess');
     wordHtml.textContent = "";
@@ -46,8 +53,6 @@ function cleanGame() {
     lettersHtml.textContent = "";
 
     displayImage("hangman");
-
-
 }
 
 function displaySpacesForWord() {
@@ -60,49 +65,63 @@ function displaySpacesForWord() {
         letterSpace.setAttribute("id", "letter" + i);
         letterSpace.style.fontSize = "200%"
         letterSpace.setAttribute("zIndex", "2");
-        letterSpace.textContent = "_ ";
+        letterSpace.textContent = "_";
         wordHtml.appendChild(letterSpace);
     }
 }
 
 function displayImage(type) {
 
-    if(type == "word")
-    {
-         document.body.style.backgroundImage = "url('assets/images/" + randomWord + ".jpg')";
+    if (type == "word") {
+        document.body.style.backgroundImage = "url('assets/images/" + randomWord + ".jpg')";
     }
 
-    if(type == "hangman")
-    {
-        document.getElementById("hangmanImg").src="assets/images/hangman" + opportunities + ".png";
+    if (type == "hangman") {
+        document.getElementById("hangmanImg").src = "assets/images/hangman" + opportunities + ".png";
     }
 
-    if(type == "winner")
-    {
-        document.getElementById("hangmanImg").src="assets/images/winner.jpg";
+    if (type == "winner") {
+        document.getElementById("hangmanImg").src = "assets/images/winner.jpg";
     }
 }
 
-function checkForWinner()
-{
-    // if (opportunities == 0) {
-    //     alert("Loooser!");
-    // }
-
-    if (lettersGuessed == randomWord.length) {
+function checkForWinner() {
+    if (lettersGuessedRight == randomWord.length) {
         displayImage("winner");
+        // window.speechSynthesis.speak(new SpeechSynthesisUtterance(randomWord));
+        
+        gameActive = false;
+        wins++;
+        updateScore(true);
     }
 }
 
-function updateOpportunities(){
+function updateScore(isWin) {
     var opportunitiesHtml = document.getElementById('opportunitiesLeft');
-    opportunitiesHtml.textContent = opportunities;
+    var winsHtml = document.getElementById('wins');
+    var losesHtml = document.getElementById('loses');
+
+    if (opportunities > 0) {
+        opportunitiesHtml.textContent = opportunities;
+    } else {
+        opportunitiesHtml.textContent = "You lost!"
+        gameActive = false;
+        loses++;
+    }
+
+    if (isWin) {
+        opportunitiesHtml.textContent = "You won!"
+    }
+
+    winsHtml.textContent = wins;
+    losesHtml.textContent = loses;
 }
 
 function startGame() {
 
     cleanGame();
-    updateOpportunities();
+    gameActive = true;
+    updateScore();
 
     //Generate random word
     randomWord = getRandomWord();
@@ -118,23 +137,30 @@ function startGame() {
 document.onkeyup = function (event) {
 
     var userGuess = event.key.toLowerCase();
+    // window.speechSynthesis.speak(new SpeechSynthesisUtterance(userGuess));
+
+    if (!gameActive || !(/[a-z]/.test(userGuess)))
+        return;
+
     //look for word in hash table to retrieve positions
     var positionList = wordHash[userGuess];
 
     if (positionList) {
         for (var i = 0; i < positionList.length; i++) {
             var space = document.getElementById('letter' + positionList[i]);
-            space.textContent = userGuess + " ";
-            lettersGuessed++;
+            space.textContent = userGuess;
+            lettersGuessedRight++;
         }
         wordHash[userGuess] = [];
-    } else {
+    } else if (!(lettersGuessedWrong.includes(userGuess))) {
+
         opportunities--;
+        lettersGuessedWrong.push(userGuess);
         displayLetterNotInWord(userGuess);
         displayImage("hangman");
     }
 
-    updateOpportunities();
     checkForWinner();
+    updateScore();
 
 }
