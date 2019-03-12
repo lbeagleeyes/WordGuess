@@ -85,18 +85,8 @@ function displayImage(type) {
     }
 }
 
-function checkForWinner() {
-    if (lettersGuessedRight == randomWord.length) {
-        displayImage("winner");
-        // window.speechSynthesis.speak(new SpeechSynthesisUtterance(randomWord));
-        
-        gameActive = false;
-        wins++;
-        updateScore(true);
-    }
-}
 
-function updateScore(isWin) {
+function updateScore() {
     var opportunitiesHtml = document.getElementById('opportunitiesLeft');
     var winsHtml = document.getElementById('wins');
     var losesHtml = document.getElementById('loses');
@@ -109,7 +99,12 @@ function updateScore(isWin) {
         loses++;
     }
 
-    if (isWin) {
+    //Winner
+    if (lettersGuessedRight == randomWord.length) {
+        displayImage("winner");
+        // window.speechSynthesis.speak(new SpeechSynthesisUtterance(randomWord)); 
+        gameActive = false;
+        wins++;  
         opportunitiesHtml.textContent = "You won!"
     }
 
@@ -121,12 +116,14 @@ function startGame() {
 
     cleanGame();
     gameActive = true;
-    updateScore();
+  
 
     //Generate random word
     randomWord = getRandomWord();
     wordHash = parseWord(randomWord);
     displayImage("word");
+
+    updateScore();
 
     displaySpacesForWord();
 
@@ -134,12 +131,12 @@ function startGame() {
 
 
 
-document.onkeyup = function (event) {
+document.onkeypress = function (event) {
 
     var userGuess = event.key.toLowerCase();
     // window.speechSynthesis.speak(new SpeechSynthesisUtterance(userGuess));
 
-    if (!gameActive || !(/[a-z]/.test(userGuess)))
+    if (!gameActive || !(/^[a-z]$/.test(userGuess)))
         return;
 
     //look for word in hash table to retrieve positions
@@ -160,7 +157,6 @@ document.onkeyup = function (event) {
         displayImage("hangman");
     }
 
-    checkForWinner();
     updateScore();
 
 }

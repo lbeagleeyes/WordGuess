@@ -19,6 +19,7 @@
     font-family: 'Roboto Mono', monospace;
 }
 
-/* #hangmanImg {
-
-} */
+.centerColumn {
+    align-content: center;
+    display: inline;
+}

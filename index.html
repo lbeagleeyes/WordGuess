@@ -41,8 +41,9 @@
           </div>
         </div>
         <div class="col-sm-6 center-text">
-          <h2 id="wordToGuess"> </h2>
-          <br><br>
+          <div class="container" id="centerColumn">
+            <h2 id="wordToGuess"> </h2>
+          </div>
         </div>
         <div class="col-sm-3">
 
@@ -61,19 +62,21 @@
         <div class="col-sm-3">
           <!-- Score -->
           <div class="card" style="width: 16rem;">
-              <div class="card-body">
-                <h5 class="card-title">Score</h5>
-                <p class="card-text">Wins:<span id="wins"></span></p>
-                <p class="card-text">Loses:<span id="loses"></span></p>
-              </div>
+            <div class="card-body">
+              <h5 class="card-title">Score</h5>
+              <p class="card-text">Wins:<span id="wins"></span></p>
+              <p class="card-text">Loses:<span id="loses"></span></p>
             </div>
+          </div>
 
         </div>
         <div class="col-sm-6">
-          <button type="button" id="playBtn" class="btn btn-primary" onclick="startGame()">New Game</button>
+          <div class="container" id="centerColumn">
+            <button type="button" id="playBtn" class="btn btn-primary" onclick="startGame()">New Game</button>
+          </div>
         </div>
         <div class="col-sm-3">
-            <img id="hangmanImg" class="img-fluid"  src="assets/images/hangman7.png">
+          <img id="hangmanImg" class="img-fluid" src="assets/images/hangman7.png">
         </div>
       </div>
     </div>
