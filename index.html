@@ -17,7 +17,7 @@
   <title>Reptile Hangman</title>
 </head>
 
-<body>
+<body onload="setupGame()">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1 class="display-5" id="mainTitle">Welcome to the Reptiles Word Guess Game!</h1>
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="col-sm-6 center-text">
-          <div class="container" id="centerColumn">
+          <div class="text-center">
             <h2 id="wordToGuess"> </h2>
           </div>
         </div>
@@ -71,7 +71,7 @@
 
         </div>
         <div class="col-sm-6">
-          <div class="container" id="centerColumn">
+          <div class="text-center">
             <button type="button" id="playBtn" class="btn btn-primary" onclick="startGame()">New Game</button>
           </div>
         </div>

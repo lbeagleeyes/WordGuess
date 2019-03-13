@@ -1,6 +1,6 @@
 #playBtn {
     width: 50%;
-    margin: 10%;
+    /* margin: 10%; */
 }
 
 #mainTitle{
@@ -15,7 +15,7 @@
 #wordToGuess {
     align-self: center;
     float: none;
-    margin-left: 10%;
+    /* margin-left: 10%; */
     font-family: 'Roboto Mono', monospace;
 }
 
