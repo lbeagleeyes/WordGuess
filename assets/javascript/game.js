@@ -8,59 +8,66 @@ class Sound {
         this.sound.setAttribute("controls", "none");
         this.sound.style.display = "none";
         document.body.appendChild(this.sound);
-        this.play = function () {
-            this.sound.play();
-        };
-        this.stop = function () {
-            this.sound.pause();
-        };
+    }
+
+    play() {
+        this.sound.play();
+    }
+    stop() {
+        this.sound.pause();
     }
 }
 
-var game;
+class Game {
+    constructor() {
+        this.randomWord = "";
+        this.wordHash = {};
+        this.opportunities = 7;
+        this.lettersGuessedRight = [];
+        this.lettersGuessedWrong = [];
+        this.isActive = false;
+        this.wins = 0;
+        this.loses = 0;
+        this.winningSound = new Sound("assets/sounds/Winning-sound-effect.mp3");
+        this.lostSound = new Sound("assets/sounds/sadtrombone.swf.mp3");
+    }
+
+    reset() {
+        this.opportunities = 7;
+        this.lettersGuessedRight = 0;
+        this.lettersGuessedWrong = [];
+        this.generateRandomWord();
+    }
+
+    generateRandomWord() {
+        var wordRepository = [
+            "turtle", "tortoise", "chameleon", "iguana", "boa", "anaconda", "mamba", "python", "viper", "rattlesnake", "crocodile", "alligator", "gecko"];
+    
+        var randomIndex = Math.floor((Math.random() * 100));
+        randomIndex = randomIndex % wordRepository.length;
+        this.randomWord = wordRepository[randomIndex];
+    
+        this.wordHash = this.parseWord(this.randomWord);    
+    }
+    
+    parseWord(word) {
+        var wordArray = {};
+        for (var i = 0; i < word.length; i++) {
+            var letter = word.charAt(i);
+            if (!wordArray[letter]) {
+                var positionList = [];
+                wordArray[letter] = positionList;
+            }
+            wordArray[letter].push(i);
+        }
+        return wordArray;
+    }
+}
 
 function setupGame() {
-    game = {
-        randomWord: "reptile",
-        wordHash: parseWord("reptile"),
-        opportunities: 7,
-        lettersGuessedRight: [],
-        lettersGuessedWrong: [],
-        isActive: false,
-        wins: 0,
-        loses: 0,
-        winningSound: new Sound("assets/sounds/Winning-sound-effect.mp3"),
-        lostSound: new Sound("assets/sounds/sadtrombone.swf.mp3")
-      //  lostSound: new Sound("assets/sounds/You-lose-sound-effect.mp3")
-    };
-
+    game = new Game();
 }
 
-function generateRandomWord() {
-    var wordRepository = [
-        "turtle", "tortoise", "chameleon", "iguana", "boa", "anaconda", "mamba", "python", "viper", "rattlesnake", "crocodile", "alligator", "gecko"];
-
-    var randomIndex = Math.floor((Math.random() * 100));
-    randomIndex = randomIndex % wordRepository.length;
-    game.randomWord = wordRepository[randomIndex];
-
-    game.wordHash = parseWord();
-
-    return;
-}
-
-function parseWord(word = game.randomWord) {
-    var wordArray = {};
-    for (var i = 0; i < word.length; i++) {
-        var letter = word.charAt(i);
-        if (!wordArray[letter]) {
-            var positionList = [];
-            wordArray[letter] = positionList;
-        }
-        wordArray[letter].push(i);
-    }
-    return wordArray;
-}
 
 function displayLetterNotInWord(letter) {
     var lettersGuessed = document.getElementById('lettersChosen');
@@ -71,10 +78,8 @@ function displayLetterNotInWord(letter) {
     lettersGuessed.appendChild(letterGuessed);
 }
 
-function cleanGame() {
-    game.opportunities = 7;
-    game.lettersGuessedRight = 0;
-    game.lettersGuessedWrong = [];
+
+function resetView() {
 
     //clean all variable spaces
     var wordHtml = document.getElementById('wordToGuess');
@@ -84,11 +89,6 @@ function cleanGame() {
     lettersHtml.textContent = "";
 
     displayImage("hangman");
-}
-
-function displaySpacesForWord() {
-
-    var wordHtml = document.getElementById('wordToGuess');
 
     //display spaces for word
     for (var i = 0; i < game.randomWord.length; i++) {
@@ -147,17 +147,15 @@ function updateScore() {
 
 function startGame() {
 
-    cleanGame();
+    game.reset();
     game.isActive = true;
 
-    generateRandomWord();
+    resetView();
 
     displayImage("word");
 
     updateScore();
-
-    displaySpacesForWord();
-
+ 
 }
 
 
