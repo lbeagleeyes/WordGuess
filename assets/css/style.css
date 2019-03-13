@@ -1,15 +1,21 @@
 #playBtn {
-    width: 50%;
-    /* margin: 10%; */
+    margin-top: 10%; 
+    overflow: auto;
+    overflow-wrap: normal;
 }
 
 #mainTitle{
     font-family: 'Luckiest Guy', cursive;
     align-content: center;
+    float: none;
+    text-align: center;
+    width: 100%;
 }
 
 .maniContainer {
     background-color: white;
+    min-height: 80%;
+    overflow-wrap: break-word;
 }
 
 #wordToGuess {

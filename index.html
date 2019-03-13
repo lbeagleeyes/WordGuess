@@ -18,70 +18,62 @@
 </head>
 
 <body onload="setupGame()">
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-5" id="mainTitle">Welcome to the Reptiles Word Guess Game!</h1>
-      <!-- <p class="lead">You have 7 opportunities to guess the word below before a reptile eats you:</p> -->
-
-    </div>
-  </div>
-
-  <div class=" maniContainer">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-3">
-          <!-- Letters chosen -->
-          <div class="card" style="width: 16rem;">
-            <div class="card-body">
-              <h5 class="card-title">Letters Chosen</h5>
-
-              <p id="lettersChosen" class="card-text"> </p>
-
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 center-text">
-          <div class="text-center">
-            <h2 id="wordToGuess"> </h2>
-          </div>
-        </div>
-        <div class="col-sm-3">
-
-          <!-- Opportunities left -->
-          <div class="card m-2" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Opportunities Left</h5>
-              <p class="card-text" id="opportunitiesLeft"></p>
-
-            </div>
-          </div>
-
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-5" id="mainTitle">Welcome to the Reptiles Word Guess Game!</h1>
+          <!-- <p class="lead">You have 7 opportunities to guess the word below before a reptile eats you:</p> -->
         </div>
       </div>
+ 
+    <div class="container" id="mainContainer">
       <div class="row">
-        <div class="col-sm-3">
-          <!-- Score -->
-          <div class="card" style="width: 16rem;">
-            <div class="card-body">
-              <h5 class="card-title">Score</h5>
-              <p class="card-text">Wins:<span id="wins"></span></p>
-              <p class="card-text">Loses:<span id="loses"></span></p>
-            </div>
-          </div>
-
-        </div>
-        <div class="col-sm-6">
-          <div class="text-center">
-            <button type="button" id="playBtn" class="btn btn-primary" onclick="startGame()">New Game</button>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <img id="hangmanImg" class="img-fluid" src="assets/images/hangman7.png">
+        <div class="col-sm-12">
+            <div class="card-deck">
+                <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">Letters Chosen</h5>
+                      <p id="lettersChosen" class="card-text"> </p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <h5 class="card-title" id="wordToGuess"></h5>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">Opportunities Left</h5>
+                      <p class="card-text" id="opportunitiesLeft"></p>
+                  </div>
+                </div>
+              </div>
         </div>
       </div>
-    </div>
 
-  </div>
+      <div class="row">
+        <div class="col-sm-12">
+            <div class="card-deck">
+                <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">Score</h5>
+                      <p class="card-text">Wins:<span id="wins"></span></p>
+                      <p class="card-text">Loses:<span id="loses"></span></p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body text-center">
+                          <button type="button" id="playBtn" class="btn btn-primary" onclick="startGame()">New Game</button>
+                  </div>
+                </div>
+                <div class="card">
+                    <img id="hangmanImg" class="card-img-top"  src="assets/images/hangman7.png" alt="Card image cap">
+        
+                </div>
+              </div>
+        </div>
+      </div>
+    
+    </div>
   <script>
 
   </script>

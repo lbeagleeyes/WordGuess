@@ -104,7 +104,8 @@ function resetView() {
 function displayImage(type) {
 
     if (type == "word") {
-        document.body.style.backgroundImage = "url('assets/images/" + game.randomWord + ".jpg')";
+        // document.body.style.backgroundImage = "url('assets/images/" + game.randomWord + ".jpg')";
+        document.getElementById("mainContainer").style.backgroundImage = "url('assets/images/" + game.randomWord + ".jpg')";
     }
 
     if (type == "hangman") {
