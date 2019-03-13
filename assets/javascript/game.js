@@ -1,32 +1,40 @@
 
 
-function sound(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    this.play = function () {
-        this.sound.play();
-    }
-    this.stop = function () {
-        this.sound.pause();
+class Sound {
+    constructor(src) {
+        this.sound = document.createElement("audio");
+        this.sound.src = src;
+        this.sound.setAttribute("preload", "auto");
+        this.sound.setAttribute("controls", "none");
+        this.sound.style.display = "none";
+        document.body.appendChild(this.sound);
+        this.play = function () {
+            this.sound.play();
+        };
+        this.stop = function () {
+            this.sound.pause();
+        };
     }
 }
 
-var game = {
-    randomWord: "reptile",
-    wordHash: parseWord("reptile"),
-    opportunities: 7,
-    lettersGuessedRight: [],
-    lettersGuessedWrong: [],
-    isActive: false,
-    wins: 0,
-    loses: 0,
-    winningSound =  new sound("Winning-sound-effect.mp3") ,
-    lostSound =  new sound("Wrong-alert-beep-sound.mp3") 
-};
+var game;
+
+function setupGame() {
+    game = {
+        randomWord: "reptile",
+        wordHash: parseWord("reptile"),
+        opportunities: 7,
+        lettersGuessedRight: [],
+        lettersGuessedWrong: [],
+        isActive: false,
+        wins: 0,
+        loses: 0,
+        winningSound: new Sound("assets/sounds/Winning-sound-effect.mp3"),
+        lostSound: new Sound("assets/sounds/sadtrombone.swf.mp3")
+      //  lostSound: new Sound("assets/sounds/You-lose-sound-effect.mp3")
+    };
+
+}
 
 function generateRandomWord() {
     var wordRepository = [
