@@ -1,7 +1,5 @@
 #playBtn {
     margin-top: 10%; 
-    overflow: auto;
-    overflow-wrap: normal;
 }
 
 #mainTitle{
@@ -12,20 +10,6 @@
     width: 100%;
 }
 
-.maniContainer {
-    background-color: white;
-    min-height: 80%;
-    overflow-wrap: break-word;
-}
-
 #wordToGuess {
-    align-self: center;
-    float: none;
-    /* margin-left: 10%; */
     font-family: 'Roboto Mono', monospace;
-}
-
-.centerColumn {
-    align-content: center;
-    display: inline;
 }
